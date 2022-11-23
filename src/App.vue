@@ -38,7 +38,7 @@ watch(
         v-for="perk in perks"
         :key="perk.code"
         @click="perk.selected = !perk.selected"
-        :class="['bg-gradient', {'bg-success': perk.selected}]"
+        :class="{'row-selected':perk.selected}"
     >
       <td class="ts w-50">{{ perk.name }}</td>
       <td class="ts w-25">{{ perk.code }}</td>
@@ -56,5 +56,14 @@ textarea {
 }
 .buttons {
   padding: 15px 0;
+}
+.row-selected {
+  background-color: darkgray;
+  color: white;
+}
+
+.row-selected:hover {
+  background-color: gray;
+  color: white;
 }
 </style>
