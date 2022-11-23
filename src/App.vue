@@ -4,7 +4,10 @@ import {ExtractedPerk, Perk} from './types';
 
 const perks: Perk[] = reactive(
     inject<ExtractedPerk[]>('perks', [])
-        .map(perk => ({...perk, selected: false}))
+        .map(perk => {
+          const result = /^(?<group>.+)\s+(?<level>\d)$/.exec(perk.name)?.groups as { group: string, level: string } | null;
+          return {...perk, selected: false, ...result};
+        })
         .sort((a: Perk, b: Perk) => a.skill.localeCompare(b.skill)),
 );
 const output = ref('');
@@ -12,6 +15,7 @@ const output = ref('');
 const reset = () => perks.forEach(perk => perk.selected = false);
 const toggle = () => perks.forEach(perk => perk.selected = !perk.selected);
 const selectAll = () => perks.forEach(perk => perk.selected = true);
+const toggleGroup = (group: string) => perks.filter(perk => perk.group === group).forEach(perk => perk.selected = true);
 
 watch(
     perks,
@@ -38,16 +42,21 @@ watch(
     </tr>
     </thead>
     <tbody>
-    <tr
-        v-for="perk in perks"
-        :key="perk.code"
-        @click="perk.selected = !perk.selected"
-        :class="{'row-selected':perk.selected}"
-    >
-      <td class="ts w-50">{{ perk.name }}</td>
-      <td class="ts w-25">{{ perk.code }}</td>
-      <td class="ts w-25">{{ perk.skill }}</td>
-    </tr>
+    <template v-for="perk in perks" :key="perk.code">
+      <tr @click="perk.selected = !perk.selected" :class="{'row-selected':perk.selected}">
+        <td class="ts w-50">
+          {{ perk.name }}
+          <span
+              v-if="perk.group && perk.level === '1'"
+              class="toggle-group"
+              @click.stop="toggleGroup(perk.group)"
+              title="Select group"
+          >&downarrow;</span>
+        </td>
+        <td class="ts w-25">{{ perk.code }}</td>
+        <td class="ts w-25">{{ perk.skill }}</td>
+      </tr>
+    </template>
     </tbody>
   </table>
 </template>
@@ -58,12 +67,15 @@ textarea {
   height: 200px;
   font-family: monospace;
 }
+
 .buttons {
   padding: 15px 0;
 }
+
 .buttons button {
   margin-right: 5px;
 }
+
 .row-selected {
   background-color: darkgray;
   color: white;
@@ -72,5 +84,10 @@ textarea {
 .row-selected:hover {
   background-color: gray;
   color: white;
+}
+
+.toggle-group {
+  float: right;
+  cursor: pointer;
 }
 </style>
