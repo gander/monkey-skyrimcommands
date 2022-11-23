@@ -10,6 +10,8 @@ const perks: Perk[] = reactive(
 const output = ref('');
 
 const reset = () => perks.forEach(perk => perk.selected = false);
+const toggle = () => perks.forEach(perk => perk.selected = !perk.selected);
+const selectAll = () => perks.forEach(perk => perk.selected = true);
 
 watch(
     perks,
@@ -24,6 +26,8 @@ watch(
   <textarea>{{ output }}</textarea>
   <div class="buttons">
     <button @click="reset" class="btn btn-info">Reset</button>
+    <button @click="toggle" class="btn btn-info">Toggle</button>
+    <button @click="selectAll" class="btn btn-info">Select All</button>
   </div>
   <table class="table table-hover">
     <thead>
@@ -56,6 +60,9 @@ textarea {
 }
 .buttons {
   padding: 15px 0;
+}
+.buttons button {
+  margin-right: 5px;
 }
 .row-selected {
   background-color: darkgray;
