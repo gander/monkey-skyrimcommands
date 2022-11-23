@@ -9,6 +9,8 @@ const perks: Perk[] = reactive(
 );
 const output = ref('');
 
+const reset = () => perks.forEach(perk => perk.selected = false);
+
 watch(
     perks,
     () => output.value = perks
@@ -20,6 +22,9 @@ watch(
 
 <template>
   <textarea>{{ output }}</textarea>
+  <div class="buttons">
+    <button @click="reset" class="btn btn-info">Reset</button>
+  </div>
   <table class="table table-hover">
     <thead>
     <tr>
@@ -48,5 +53,8 @@ textarea {
   width: 100%;
   height: 200px;
   font-family: monospace;
+}
+.buttons {
+  padding: 15px 0;
 }
 </style>
