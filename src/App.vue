@@ -17,7 +17,7 @@ watch(
     perks,
     () => output.value = perks
         .filter(perk => perk.selected)
-        .map(perk => `# ${perk.skill} > ${perk.name}\nplayer.addperk ${perk.code}\n`)
+        .map(perk => `; ${perk.skill} > ${perk.name}\nplayer.addperk ${perk.code}\n`)
         .join(`\n`),
 );
 </script>
