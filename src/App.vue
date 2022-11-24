@@ -86,9 +86,4 @@ textarea {
   background-color: gray;
   color: white;
 }
-
-.toggle-group {
-  float: right;
-  cursor: pointer;
-}
 </style>
