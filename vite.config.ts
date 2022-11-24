@@ -14,8 +14,7 @@ export default defineConfig({
         match: ['https://skyrimcommands.com/perks'],
         version,
         author: 'Adam Gąsowski',
-        downloadURL: `https://github.com/gander/monkey-skyrimcommands/releases/v${version}/download/monkey-skyrimcommands.user.js`,
-        updateURL: 'https://github.com/gander/monkey-skyrimcommands/releases/latest/download/monkey-skyrimcommands.user.js'
+        homepageURL: 'https://github.com/gander/monkey-skyrimcommands/releases/latest/download/monkey-skyrimcommands.user.js'
       },
       build: {
         externalGlobals: {
