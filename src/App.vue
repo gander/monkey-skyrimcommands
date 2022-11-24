@@ -5,8 +5,8 @@ import {ExtractedPerk, Perk} from './types';
 const perks: Perk[] = reactive(
     inject<ExtractedPerk[]>('perks', [])
         .map(perk => {
-          const result = /^(?<group>.+)\s+(?<level>\d)$/.exec(perk.name)?.groups as { group: string, level: string } | null;
-          return {...perk, selected: false, ...result};
+          const result = /^(?<group>.+)\s*\d$/.exec(perk.name)?.groups as { group: string } | null;
+          return {...perk, selected: false, group: result?.group || perk.name};
         })
         .sort((a: Perk, b: Perk) => a.skill.localeCompare(b.skill)),
 );
@@ -15,7 +15,8 @@ const output = ref('');
 const reset = () => perks.forEach(perk => perk.selected = false);
 const toggle = () => perks.forEach(perk => perk.selected = !perk.selected);
 const selectAll = () => perks.forEach(perk => perk.selected = true);
-const toggleGroup = (group: string) => perks.filter(perk => perk.group === group).forEach(perk => perk.selected = true);
+const toggleGroup = (group?: string, selected: boolean = true) => group && perks.filter(perk => perk.group === group).forEach(perk => perk.selected = selected);
+const toggleSkill = (skill?: string, selected: boolean = true) => skill && perks.filter(perk => perk.skill === skill).forEach(perk => perk.selected = selected);
 
 watch(
     perks,
@@ -33,6 +34,14 @@ watch(
     <button @click="toggle" class="btn btn-info">Toggle</button>
     <button @click="selectAll" class="btn btn-info">Select All</button>
   </div>
+  <dl>
+    <dt>Click</dt>
+    <dd>Select / Deselect perk</dd>
+    <dt>Ctrl+Click on name</dt>
+    <dd>Select Group of perks, if applicable</dd>
+    <dt>Ctrl+Click on skill</dt>
+    <dd>Select Skill of perks, if applicable</dd>
+  </dl>
   <table class="table table-hover">
     <thead>
     <tr>
@@ -44,17 +53,9 @@ watch(
     <tbody>
     <template v-for="perk in perks" :key="perk.code">
       <tr @click="perk.selected = !perk.selected" :class="{'row-selected':perk.selected}">
-        <td class="ts w-50">
-          {{ perk.name }}
-          <span
-              v-if="perk.group && perk.level === '1'"
-              class="toggle-group"
-              @click.stop="toggleGroup(perk.group)"
-              title="Select group"
-          >&downarrow;</span>
-        </td>
+        <td class="ts w-50" @click.ctrl.exact.stop="toggleGroup(perk.group, true)">{{ perk.name }}</td>
         <td class="ts w-25">{{ perk.code }}</td>
-        <td class="ts w-25">{{ perk.skill }}</td>
+        <td class="ts w-25" @click.ctrl.exact.stop="toggleSkill(perk.skill, true)">{{ perk.skill }}</td>
       </tr>
     </template>
     </tbody>
