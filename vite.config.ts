@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import monkey, { cdn } from 'vite-plugin-monkey';
-import {version} from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,10 +11,7 @@ export default defineConfig({
       userscript: {
         namespace: 'npm/vite-plugin-monkey',
         match: ['https://skyrimcommands.com/perks'],
-        version,
-        author: 'Adam Gąsowski',
-        downloadURL: 'https://github.com/gander/monkey-skyrimcommands/releases/latest/download/monkey-skyrimcommands.user.js',
-        homepageURL: 'https://github.com/gander/monkey-skyrimcommands/releases/'
+        homepageURL: 'https://github.com/gander/monkey-skyrimcommands/'
       },
       build: {
         externalGlobals: {
