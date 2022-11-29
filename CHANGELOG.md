@@ -5,12 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.3.3](https://github.com/gander/monkey-skyrimcommands/compare/v0.3.1...v0.3.3)
+## [v0.4.0](https://github.com/gander/monkey-skyrimcommands/compare/v0.3.3...v0.4.0)
 
 ### Commits
 
 - install release-it and auto-changelog [`8f8ee7c`](https://github.com/gander/monkey-skyrimcommands/commit/8f8ee7cdd76d0e5c1e3e3c5323b4affe97841bff)
+- add CHANGELOG.md [`44a2189`](https://github.com/gander/monkey-skyrimcommands/commit/44a2189cff954abb341ed72eccc6be9d9d2fb816)
+- add release script [`ab8a522`](https://github.com/gander/monkey-skyrimcommands/commit/ab8a522349d2c2ac2c4f1799229458a2a40a8e4e)
+
+## [v0.3.3](https://github.com/gander/monkey-skyrimcommands/compare/v0.3.2...v0.3.3) - 2022-11-24
+
+### Commits
+
 - release 0.3.3 [`98298f3`](https://github.com/gander/monkey-skyrimcommands/commit/98298f3f89f330367ac55fc30410145082c9bec4)
+
+## [v0.3.2](https://github.com/gander/monkey-skyrimcommands/compare/v0.3.1...v0.3.2) - 2022-11-24
+
+### Commits
+
 - release 0.3.2 [`c487c2f`](https://github.com/gander/monkey-skyrimcommands/commit/c487c2f252c5de3eea599ad038635a655b5ac9e6)
 
 ## [v0.3.1](https://github.com/gander/monkey-skyrimcommands/compare/v0.3.0...v0.3.1) - 2022-11-24
